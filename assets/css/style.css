@@ -150,3 +150,100 @@ footer {
     height: 200px;
     margin-top: 5rem;
 }
+
+
+/* OPSKRIFT */
+.opskriftIntro {
+    padding: 5rem 8rem 5rem 8rem;
+    display: flex;
+    gap: 5rem;
+
+    .opskriftTitel {
+        font-size: 5rem;
+        font-weight: lighter;
+        margin: 0;
+    }
+
+
+    .stars {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        i {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 2rem;
+        }
+
+    }
+
+    img {
+        width: 600px;
+        height: 400px;
+    }
+
+    .kategorier {
+        display: flex;
+        gap: 1rem;
+        padding-top: 8rem;
+
+        .kategori {
+            display: flex;
+            justify-content: center;
+            background-color: var(--lightPurple);
+            color: var(--darkGreen);
+            padding: 0.5rem;
+            border-radius: 15px;
+            width: 150px;
+            height: 30px;
+            box-shadow: #211240 0px 1px 3px, #211240 0px 1px 2px;
+        }
+    }
+}
+
+.description {
+    padding: 0 20rem 2rem 20rem;
+    color: var(--darkGreen);
+}
+
+hr {
+    border-top: 5px solid var(--beige);
+    margin: 2rem 20rem;
+
+}
+
+.antal {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.fremgangsmaade {
+    display: flex;
+    padding: 1rem 8rem 5rem 8rem;
+    gap: 5rem;
+
+    .ingredienser {
+        background-color: var(--beige);
+        color: var(--darkGreen);
+        padding: 1rem 2rem;
+        width: 500px;
+
+        li {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .fremgang {
+        color: var(--darkGreen);
+        padding: 2rem;
+
+        li {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
