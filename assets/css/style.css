@@ -7,7 +7,7 @@
     /* farver */
     --beige: #B2A250;
     --light: #F1E5AA;
-    --lightPurple: #9E80C6;
+    --lightPurple: #caa1ff;
     --darkBlue: #211240;
     --darkGreen: #39310D;
 
@@ -20,10 +20,14 @@ body {
 
 /* header */
 header {
-    background-image: url(../img/spiral-vegetable-tart.webp);
-    background-size: cover;
+    img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        opacity: 0.5;
+    }
 
-    height: 300px;
+
 
     ul {
         display: flex;
@@ -32,6 +36,9 @@ header {
         height: 100%;
         list-style: none;
         align-items: flex-end;
+        background-color: var(--beige);
+        height: 55px;
+        margin-top: -4px;
 
 
         li {
@@ -55,6 +62,8 @@ header {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: -60px;
+            z-index: 1;
 
 
             svg {
@@ -114,10 +123,11 @@ header {
             padding: 0.5rem;
             width: 800px;
             height: 50px;
-            color: var(--darkGreen);
-            border-radius: 5px;
+            border-radius: 100px;
+            border-color: var(--beige);
             font-size: 1.1rem;
             font-weight: light;
+            background-color: var(--lightPurple);
 
         }
 
@@ -127,6 +137,10 @@ header {
         }
     }
 
+}
+
+input::placeholder {
+    color: var(--darkGreen);
 }
 
 
@@ -182,8 +196,15 @@ header {
 
 footer {
     background-color: var(--beige);
-    height: 200px;
+    height: 100px;
     margin-top: 5rem;
+
+    p {
+        text-align: center;
+        padding-top: 2rem;
+        color: var(--darkGreen);
+    }
+
 }
 
 

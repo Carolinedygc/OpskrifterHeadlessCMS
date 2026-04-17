@@ -1,6 +1,6 @@
 const containerEl = document.querySelector(".cards");
 const baseUrl = "https://headlesscms.hesselbergsdomain.dk/wp-json/";
-const postsUrl = "wp/v2/posts?acf_format=standard"
+const postsUrl = "wp/v2/posts?acf_format=standard&per_page=25"
 
 
 // Henter ALLE public posts
@@ -39,7 +39,7 @@ function renderArticles(posts) {
 					<h2>${post.title.rendered}</h2>
 					<div class="info">
 						<p>TID: ${post.acf.tid_i_alt}</p>
-						<p>ANTAL: ${post.acf.antal}</p>
+						<p>ANTAL: ${post.acf.antal_portioner}</p>
 					</div>
 					<p>${truncateWords(post.acf.beskrivelse, 15)}</p>
 				</div>
@@ -63,28 +63,90 @@ if (containerEl) {
 
 
 
+// FILTER
+
+// Kostpræfference id'er
+
+// allergener
+const allergenerID = 33;
+const fiskefriID = 35;
+const glutenfriID = 26;
+const laktosefriID = 24;
+const mælkefriID = 36;
+const nøddefriID = 28;
+const skaldyrsfriID = 37;
+
+// præferencer
+const præferencerID = 34;
+const børnevenligID = 41;
+const halalID = 38;
+const kosherID = 39;
+const pesketarID = 40;
+const veganskID = 25;
+const vegatariskID = 27;
+
+// måltidstype id'er
+const aftensmadID = 29;
+const frokostID = 30;
+const morgenmadID = 31;
+const dessertID = 32;
+
+// sæsone id'er
+const forårID = 20;
+const sommerID = 17;
+const efterårID = 18
+const vinterID = 19;
+
+// tilberedsningstid id'er
+const hurtigID = 21;
+const mediumID = 22;
+const langsomID = 23;
 
 
+// Henter public posts ud fra taxonomi
+
+function getAllPostsByTax(cooktimeID, seasonID, mealtypeID, preferenceID) {
+    let search = `posts?status=publish&categorys=${allergenerID},${fiskefriID},${glutenfriID},${laktosefriID},${mælkefriID},${nøddefriID},${skaldyrsfriID},${præferencerID},${børnevenligID},${halalID},${kosherID},${pesketarID},${veganskID},${vegatariskID},${aftensmadID},${frokostID},${morgenmadID},${dessertID},${forårID},${sommerID},${efterårID},${vinterID},${hurtigID},${mediumID},${langsomID}`;
+
+    if (cooktimeID) {
+        search += `&cooktime=${cooktimeID}`
+    }
+    if (seasonID) {
+        search += `&season=${seasonID}`
+    }
+    if (mealtypeID) {
+        search += `&mealtype=${mealtypeID}`
+    }
+    if (preferenceID) {
+        search += `&preference=${preferenceID}`
+    }
+
+    fetch(baseUrl + search)
+        .then(res => res.json())
+        .then(data => renderArticles(data))
+        .catch(err => console.log("FEJL!: ", err));
+}
+
+getAllPostsByTax(hurtigID, sommerID, aftensmadID, børnevenligID);
+
+
+
+
+
+
+
+
+
+
+// ENKELTE OPSKRIFTER
 
 const parameter = new URLSearchParams(window.location.search);
 const slug = parameter.get("slug");
 
 
-// const titleEl = document.querySelector(".opskriftTitel");
-// const descriptionEl = document.querySelector(".description");
-// const tidEl = document.querySelector(".tid");
-// const antalEl = document.querySelector(".antal");
-// const ingredienserEl = document.querySelector(".ingredienser");
-// const fremgangEl = document.querySelector(".fremgang");
-// const kategorierEl = document.querySelector(".kategorier");
-// const starsEl = document.querySelector(".stars");
-// const billedeEl = document.querySelector(".opskriftIntro img");
-// const breadCrumbsEl = document.querySelector(".breadcrumb");
-
-
 async function hentOpskrift() {
     try {
-        const response = await fetch(`${baseUrl}wp/v2/posts?slug=${slug}`);
+        const response = await fetch(`${baseUrl}wp/v2/posts?slug=${slug}&acf_format=standard`);
         const data = await response.json();
         // renderopskrift(opskrifter);
 
@@ -111,6 +173,19 @@ const containerEl2 = document.querySelector(".opskriftContainer");
 
 
 function visOpskrift(opskrift) {
+
+    // filter fjerner tomme værdier, map laver HTML for hver ingrediens og join samler det til en string
+    // dette gøres for både ingredienser og fremgangsmåde, da de begge er gemt som objekter med flere værdier i ACF
+    const ingredienserHTML = Object.values(opskrift.acf.ingredienser)
+        .filter(item => item)
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+    const fremgangsmaadeHTML = Object.values(opskrift.acf.fremgangsmade)
+        .filter(item => item)
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
     containerEl2.innerHTML = `
       <section class="opskriftIntro">
             <img src="${opskrift.acf.billede.url}" alt="${opskrift.title.rendered}">
@@ -137,34 +212,18 @@ function visOpskrift(opskrift) {
 
             <hr>
         </section>
-        <p class="antal">ANTAL PERSONER <i class="fa-solid fa-angle-down"></i></p>
+        <p class="antal">ANTAL PERSONER: ${opskrift.acf.antal_portioner} <i class="fa-solid fa-angle-down"></i></p>
         <section class="fremgangsmaade">
             <div class="ingredienser">
                 <h2>Ingredienser</h2>
                 <ul>
-                    <li>${opskrift.acf.ingredienser[0]}</li>
-                    <li>${opskrift.acf.ingredienser[1]}</li>
-                    <li>${opskrift.acf.ingredienser[2]}</li>
-                    <li>${opskrift.acf.ingredienser[3]}</li>
-                    <li>${opskrift.acf.ingredienser[4]}</li>
-                    <li>${opskrift.acf.ingredienser[5]}</li>
-                    <li>${opskrift.acf.ingredienser[6]}</li>
-                    <li>${opskrift.acf.ingredienser[7]}</li>
-                    <li>${opskrift.acf.ingredienser[8]}</li>
+                    ${ingredienserHTML}
                 </ul>
             </div>
             <div class="fremgang">
                 <h2>Fremgangsmåde</h2>
                 <ol>
-                    <li>${opskrift.acf.fremgangsmade[0]}</li>
-                    <li>${opskrift.acf.fremgangsmade[1]}</li>
-                    <li>${opskrift.acf.fremgangsmade[2]}</li>
-                    <li>${opskrift.acf.fremgangsmade[3]}</li>
-                    <li>${opskrift.acf.fremgangsmade[4]}</li>
-                    <li>${opskrift.acf.fremgangsmade[5]}</li>
-                    <li>${opskrift.acf.fremgangsmade[6]}</li>
-                    <li>${opskrift.acf.fremgangsmade[7]}</li>
-                    <li>${opskrift.acf.fremgangsmade[8]}</li>
+                    ${fremgangsmaadeHTML}
                 </ol>
             </div>
         </section>
