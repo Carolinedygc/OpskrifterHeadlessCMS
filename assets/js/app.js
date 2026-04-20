@@ -105,29 +105,29 @@ const langsomID = 23;
 
 // Henter public posts ud fra taxonomi
 
-function getAllPostsByTax(cooktimeID, seasonID, mealtypeID, preferenceID) {
-    let search = `posts?status=publish&categorys=${allergenerID},${fiskefriID},${glutenfriID},${laktosefriID},${mælkefriID},${nøddefriID},${skaldyrsfriID},${præferencerID},${børnevenligID},${halalID},${kosherID},${pesketarID},${veganskID},${vegatariskID},${aftensmadID},${frokostID},${morgenmadID},${dessertID},${forårID},${sommerID},${efterårID},${vinterID},${hurtigID},${mediumID},${langsomID}`;
+// function getAllPostsByTax(cooktimeID, seasonID, mealtypeID, preferenceID) {
+//     let search = `posts?status=publish&categorys=${allergenerID},${fiskefriID},${glutenfriID},${laktosefriID},${mælkefriID},${nøddefriID},${skaldyrsfriID},${præferencerID},${børnevenligID},${halalID},${kosherID},${pesketarID},${veganskID},${vegatariskID},${aftensmadID},${frokostID},${morgenmadID},${dessertID},${forårID},${sommerID},${efterårID},${vinterID},${hurtigID},${mediumID},${langsomID}`;
 
-    if (cooktimeID) {
-        search += `&cooktime=${cooktimeID}`
-    }
-    if (seasonID) {
-        search += `&season=${seasonID}`
-    }
-    if (mealtypeID) {
-        search += `&mealtype=${mealtypeID}`
-    }
-    if (preferenceID) {
-        search += `&preference=${preferenceID}`
-    }
+//     if (cooktimeID) {
+//         search += `&cooktime=${cooktimeID}`
+//     }
+//     if (seasonID) {
+//         search += `&season=${seasonID}`
+//     }
+//     if (mealtypeID) {
+//         search += `&mealtype=${mealtypeID}`
+//     }
+//     if (preferenceID) {
+//         search += `&preference=${preferenceID}`
+//     }
 
-    fetch(baseUrl + search)
-        .then(res => res.json())
-        .then(data => renderArticles(data))
-        .catch(err => console.log("FEJL!: ", err));
-}
+//     fetch(baseUrl + search)
+//         .then(res => res.json())
+//         .then(data => renderArticles(data))
+//         .catch(err => console.log("FEJL!: ", err));
+// }
 
-getAllPostsByTax(hurtigID, sommerID, aftensmadID, børnevenligID);
+// getAllPostsByTax(hurtigID, sommerID, aftensmadID, børnevenligID);
 
 
 
@@ -233,3 +233,16 @@ function visOpskrift(opskrift) {
 if (containerEl2) {
     hentOpskrift();
 }
+
+
+
+
+// FILTERKNAP
+
+const filterBtn = document.querySelector(".filter");
+const filterForm = document.querySelector(".filtrerForm");
+
+filterBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    filterForm.classList.toggle("active");
+});

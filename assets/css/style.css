@@ -93,9 +93,14 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    padding: 5rem 8rem 5rem 8rem;
+    padding: 5rem 10rem 2rem 10rem;
 
-    button {
+
+
+    .sorter {
+        background-color: var(--darkGreen);
+        color: var(--light);
+        border: none;
         width: 150px;
         height: 50px;
         border-radius: 5px;
@@ -106,43 +111,106 @@ header {
         font-weight: light;
     }
 
-    .filtrer {
+    .filter {
+        display: none;
         background-color: var(--beige);
         color: var(--darkGreen);
         border: none;
-    }
-
-    .sorter {
-        background-color: var(--darkGreen);
-        color: var(--light);
-        border: none;
+        width: 150px;
+        height: 50px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: light;
     }
 
     .searchbar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
         input {
             padding: 0.5rem;
-            width: 800px;
+            width: 700px;
             height: 50px;
             border-radius: 100px;
             border-color: var(--beige);
             font-size: 1.1rem;
-            font-weight: light;
             background-color: var(--lightPurple);
-
         }
 
         i {
             color: var(--darkGreen);
             font-size: 30px;
+
         }
     }
 
 }
 
+
 input::placeholder {
     color: var(--darkGreen);
 }
 
+
+.filtrerForm {
+    display: none;
+    /* 
+    display: flex;
+    gap: 20px;
+    padding: 0rem 10rem 5rem 10rem;
+    justify-content: space-between;
+
+    option {
+        display: flex;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: lighter;
+        padding: 0rem 1rem;
+
+    } */
+
+}
+
+.filtrerForm.active {
+    display: block;
+    display: flex;
+    gap: 20px;
+    padding: 0rem 10rem 5rem 10rem;
+    justify-content: space-between;
+
+    option {
+        display: flex;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: lighter;
+        padding: 0rem 1rem;
+
+    }
+}
+
+.filterKnap {
+    background-color: var(--beige);
+    color: var(--darkGreen);
+    border: none;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: lighter;
+    padding: 0rem 2rem;
+}
+
+.filterOverskrift {
+    font-size: 1.5rem;
+    font-weight: lighter;
+    padding-left: 5rem;
+}
 
 /* cards */
 .cards {

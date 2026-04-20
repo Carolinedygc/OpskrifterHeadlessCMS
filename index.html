@@ -34,12 +34,70 @@
 		</ul>
 	</header>
 	<section class="search">
-		<button class="filtrer">Filtrér <i class="fa-solid fa-plus"></i></button>
+		<button class="filter" type="button">Filtrér <i class="fa-solid fa-plus"></i></button>
+
 		<div class="searchbar">
 			<input type="text" placeholder="Søg efter opskrifter...">
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</div>
-		<button class="sorter">Sortér <i class="fa-solid fa-angle-down"></i></button>
+		<button class="sorter" type="button">Sortér <i class="fa-solid fa-angle-down"></i></button>
+	</section>
+
+	<section class="filtrer">
+
+		<form class="filtrerForm">
+
+			<div>
+
+				<select name="allergener" id="allergener" class="filterKnap">
+					<option value="vælg">Allergener</option>
+					<option value="fiskefri">Fiskefri</option>
+					<option value="glutenfri">Glutenfri</option>
+					<option value="laktosefri">Laktosefri</option>
+					<option value="nøddefri">Nøddefri</option>
+					<option value="mælkefri">Mælkefri</option>
+					<option value="skaldyrsfri">Skaldyrsfri</option>
+				</select>
+			</div>
+			<div>
+				<select name="præferencer" id="præferencer" class="filterKnap">
+					<option value="vælg">præferencer</option>
+					<option value="børnevenlig">Børnevenlig</option>
+					<option value="halal">Halal</option>
+					<option value="kosher">Kosher</option>
+					<option value="pesketar">Pesketar</option>
+					<option value="vegansk">Vegansk</option>
+					<option value="vegatarisk">Vegatarisk</option>
+				</select>
+			</div>
+			<div>
+				<select name="måltidstyper" id="måltidstyper" class="filterKnap">
+					<option value="vælg">Måltidstyper</option>
+					<option value="aftensmad">Aftensmad</option>
+					<option value="frokost">Frokost</option>
+					<option value="morgenmad">Morgenmad</option>
+					<option value="dessert">Dessert</option>
+				</select>
+			</div>
+			<div>
+				<select name="sæson" id="sæson" class="filterKnap">
+					<option value="vælg">Sæson</option>
+					<option value="forår">Forår</option>
+					<option value="sommer">Sommer</option>
+					<option value="efterår">Efterår</option>
+					<option value="vinter">Vinter</option>
+				</select>
+			</div>
+
+			<div>
+				<select name="tilberedningstid" id="tilberedningstid" class="filterKnap">
+					<option value="vælg">Tilberedningstid</option>
+					<option value="hurtig">Hurtig</option>
+					<option value="medium">Medium</option>
+					<option value="langsom">Langsom</option>
+				</select>
+			</div>
+		</form>
 	</section>
 	<section class="cards">
 		<!-- <article class="card">
