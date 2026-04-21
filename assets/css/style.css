@@ -5,11 +5,10 @@
 
     /* VARIABLER */
     /* farver */
-    --beige: #B2A250;
+    --beige: #cbb57d;
     --light: #F1E5AA;
-    --lightPurple: #caa1ff;
-    --darkBlue: #211240;
-    --darkGreen: #39310D;
+    --lightPurple: #e9dff7;
+    --darkGreen: #534a1f;
 
 }
 
@@ -20,6 +19,9 @@ body {
 
 /* header */
 header {
+    position: relative;
+
+
     img {
         width: 100%;
         height: 300px;
@@ -31,61 +33,66 @@ header {
 
     ul {
         display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        height: 100%;
         list-style: none;
-        align-items: flex-end;
+        align-items: stretch;
         background-color: var(--beige);
         height: 55px;
         margin-top: -4px;
 
-
         li {
+            flex: 1;
+            /* fylder lige meget */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             font-size: 1.2rem;
             font-weight: lighter;
-            padding: 1rem;
 
             a {
                 text-decoration: none;
                 color: var(--light);
-                text-shadow: 2px 2px 4px var(--darkBlue);
+                text-shadow: 2px 2px 4px var(--darkGreen);
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-
         }
-
-        .logo {
-            background-color: var(--beige);
-            width: 200px;
-            height: 200px;
-            border-radius: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: -60px;
-            z-index: 1;
-
-
-            svg {
-                width: 150px;
-                height: 150px;
-                fill: var(--darkGreen);
-            }
-
-        }
-
-
     }
 
-    li:hover {
+    .link:hover {
         background-color: var(--light);
-        padding: 1rem;
 
         a {
             color: var(--darkGreen);
             text-shadow: none;
         }
     }
+
+    .logo {
+        background-color: var(--beige);
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -60px;
+        /* juster efter behov */
+        z-index: 1;
+
+        i {
+            color: var(--darkGreen);
+            font-size: 6rem;
+        }
+
+
+    }
+
 }
 
 .search {
@@ -155,6 +162,29 @@ input::placeholder {
     color: var(--darkGreen);
 }
 
+/* FILTER */
+.filter {
+    display: none;
+    background-color: var(--beige);
+    color: var(--darkGreen);
+    border: none;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: light;
+}
+
+.filterValg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
 
 .filtrerForm {
     display: none;
@@ -178,7 +208,9 @@ input::placeholder {
 .filtrerForm.active {
     display: block;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    align-items: center;
     padding: 0rem 10rem 5rem 10rem;
     justify-content: space-between;
 
@@ -206,22 +238,45 @@ input::placeholder {
     padding: 0rem 2rem;
 }
 
-.filterOverskrift {
-    font-size: 1.5rem;
-    font-weight: lighter;
-    padding-left: 5rem;
+/* Aktiv tilstand — når en værdi er valgt */
+.filterKnap.hasValue {
+    border-color: #7F77DD;
+    background-color: #EEEDFE;
+    color: #3C3489;
 }
 
+.nulstilKnap {
+    color: var(--darkGreen);
+    background: none;
+    border: none;
+    cursor: pointer;
+
+}
+
+.nulstilKnap:hover {
+    text-decoration: underline;
+}
+
+.filter:hover {
+    background-color: var(--darkGreen);
+    color: var(--light);
+}
+
+
 /* cards */
-.cards {
+.cards,
+.greensCards,
+.ulveCards {
     display: flex;
     flex-wrap: wrap;
     gap: 70px;
-    padding: 0 10rem 0 10rem;
+    padding: 5rem 10rem 0 10rem;
     justify-content: center;
 }
 
-.card {
+.card,
+.greensCard,
+.ulveCard {
     width: 350px;
     height: 550px;
     border-radius: 10px;
@@ -277,6 +332,29 @@ footer {
 
 
 /* OPSKRIFT */
+.breadcrumb {
+    color: var(--darkGreen);
+    padding: 1rem 5rem 1rem 5rem;
+    display: flex;
+    gap: 1rem;
+
+    a {
+        text-decoration: none;
+        color: var(--darkGreen);
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a:hover,
+    p:hover {
+        text-decoration: underline;
+    }
+
+}
+
+
 .opskriftIntro {
     padding: 5rem 8rem 5rem 8rem;
     display: flex;
@@ -308,6 +386,7 @@ footer {
         width: 600px;
         height: 400px;
         object-fit: cover;
+        border-radius: 10px;
     }
 
     .kategorier {
@@ -326,12 +405,20 @@ footer {
             height: 30px;
             box-shadow: #211240 0px 1px 3px, #211240 0px 1px 2px;
         }
+
+        .kategori:hover {
+            background-color: var(--darkGreen);
+            color: var(--light);
+        }
     }
 }
 
 .description {
-    padding: 0 20rem 2rem 20rem;
+    display: flex;
+    justify-content: center;
     color: var(--darkGreen);
+    padding: 0rem 10rem 2rem 10rem;
+
 }
 
 hr {
@@ -348,6 +435,7 @@ hr {
 
 .fremgangsmaade {
     display: flex;
+
     padding: 1rem 8rem 5rem 8rem;
     gap: 5rem;
 
@@ -355,7 +443,7 @@ hr {
         background-color: var(--beige);
         color: var(--darkGreen);
         padding: 1rem 2rem;
-        width: 500px;
+        flex: 1;
 
         li {
             list-style: none;
@@ -366,9 +454,231 @@ hr {
     .fremgang {
         color: var(--darkGreen);
         padding: 2rem;
+        flex: 2;
 
         li {
             margin-bottom: 1.5rem;
         }
+    }
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+
+    input {
+        width: 600px;
+        height: 200px;
+        border-radius: 10px;
+        border-color: var(--beige);
+        font-size: 1.1rem;
+        background-color: var(--lightPurple);
+        padding: 1rem;
+    }
+
+
+    button {
+        background-color: var(--darkGreen);
+        color: var(--light);
+        border: none;
+        width: 150px;
+        height: 50px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: light;
+
+    }
+
+    .stars {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        i {
+            font-size: 2rem;
+            color: var(--beige);
+            cursor: pointer;
+        }
+    }
+
+    .stars i:hover {
+        color: var(--darkGreen);
+    }
+
+    button:hover {
+        box-shadow: var(--darkGreen) 0px 4px 8px, var(--darkGreen) 0px 6px 20px;
+    }
+}
+
+/* andre opskrifter */
+
+.relaterede {
+    padding-left: 10rem;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    color: var(--darkGreen);
+}
+
+.andreOpskrifter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 1rem 10rem 0 10rem;
+    justify-content: space-between;
+
+    .andreCard {
+        width: 250px;
+        height: auto;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+            flex: 1;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .text {
+            padding: 1rem;
+            background-color: var(--darkGreen);
+            color: var(--light);
+            height: 200px;
+
+            h2,
+            p {
+                font-weight: lighter;
+            }
+
+        }
+    }
+
+}
+
+.andreCard:hover {
+    box-shadow: var(--darkGreen) 0px 4px 8px, var(--darkGreen) 0px 6px 20px;
+}
+
+
+
+
+
+
+/* INSPIRATION */
+
+.overskrift {
+    text-align: center;
+
+    h1 {
+        font-size: 4rem;
+        font-weight: lighter;
+        padding: 5rem 0 0 0;
+        margin: 0;
+    }
+
+
+    p {
+        font-size: 1.5rem;
+        font-weight: lighter;
+    }
+
+}
+
+.inspiration {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5rem 10rem 0 10rem;
+    gap: 5rem;
+
+
+
+    a {
+        text-decoration: none;
+        background-color: var(--beige);
+        color: var(--darkGreen);
+        border: none;
+        height: 50px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: lighter;
+        padding: 0rem 2rem;
+    }
+
+    a:hover {
+        background-color: var(--lightPurple);
+        color: var(--darkGreen);
+
+    }
+
+    .inspiCard {
+        background-color: var(--darkGreen);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        border-radius: 10px;
+
+        img {
+            width: 500px;
+            height: auto;
+            object-fit: cover;
+        }
+
+
+        .inspiText {
+            padding: 5rem 2rem;
+
+            p {
+                font-size: 1.2rem;
+                font-weight: lighter;
+                color: var(--light);
+            }
+
+            h2 {
+                font-size: 2rem;
+                font-weight: lighter;
+                color: var(--light);
+            }
+        }
+    }
+
+
+}
+
+
+.introTilSamling {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 25rem 0 25rem;
+
+    h1 {
+        font-size: 70px;
+        color: var(--darkGreen);
+        margin: 0;
+
+    }
+
+    p {
+        color: var(--darkGreen);
+
     }
 }
